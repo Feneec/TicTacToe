@@ -44,10 +44,10 @@ namespace TicTacToe
 
                 btn.Text = turn == true ? "X" : "O";
 
-                turn = !turn;
-                turnCount++;
                 btn.Enabled = false;
+                turnCount++;
                 Check();
+                turn = !turn;
 
             }
             catch { }
@@ -65,10 +65,16 @@ namespace TicTacToe
             else if ((b1.Text == b5.Text) && (b5.Text == b9.Text) && b1.Text != "") { _winner = true; }
             else if ((b3.Text == b5.Text) && (b5.Text == b7.Text) && b3.Text != "") { _winner = true; }
 
+            string win;
+
             if (_winner)
             {
-                string win = "";
-                win = turn == true ? "X" : "O";
+                win = turn == true ? "Победили X!" : "Победили O!";
+
+                Winner(win);
+            } else if (turnCount == 9)
+            {
+                win = "Ничья!";
 
                 Winner(win);
             }
@@ -77,7 +83,7 @@ namespace TicTacToe
         void Winner(string text)
         {
             panelWinner.Visible = true;
-            labelWinner.Text = $"Победили {text}!";
+            labelWinner.Text = text;
         }
     }
 }
